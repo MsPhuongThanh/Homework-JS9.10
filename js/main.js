@@ -1,41 +1,84 @@
-//1. In ra table danh sách nhân viên = tạo lớp đối tượng nhân viên
-function staff(_account,_name, _email, _password,_workingdate,_salary,_position,_workinghours)
-{this.account = _account;
-    this.name = _name;
-    this.email = _email;
-    this.password = _password;
-    this.workingdate = _workingdate;
-    this.salary = _salary;
-    this.position = _position;
-    this.workinghours = _workinghours;
-    this.
+//1. In ra table danh sách nhân viên
+function Staff(account, name, email, password, workingdate, salary, position, workinghours){
+this.account = account;
+this.name = name;
+this.email = email;
+this.password = password;
+this.workingdate = workingdate;
+this.salary =  salary;
+this.position = position;
+this.workinghours = workinghours;
 }
+function dom(selector){
+    return document.querySelector(selector);
 
-// DOM tới nhiều phần tử 
-function domAll(selector) {
-    return document.querySelectorAll(selector)
 }
-// Tạo array staff để lưu danh sách nhân viên
-let staffs =[];
-init();
-function init(){
-    staffs = JSON.parse(localStorage.getItem("staffs"))||[];
-    staffs = staffs.map((staff)=>{
-        return new staff(
-            staff.account,
-            staff.name,
-            staff.email,
-            staff.password,
-            staff.workingdate,
-            staff.salary,
-            staff.position,
-            staff.workinghours
-        );
-    });
-    console.log(" danh sách staff: ", staffs);
-    display(staffs);
+// Hàm tính tổng lương
+Staff.prototype.calcScore = function(){
+    let currentFormat = new Intl.NumberFormat("vn-VN");
+    if (this.position == "Sếp"){
+        return currentFormat.format(this.salary *3);
+    }else if (this.position == "Trưởng Phòng"){
+        return currentFormat.format(this.salary *2);
+    }else if (this.postition == "Nhân Viên"){
+        return currentFormat.format (this.salary *1);
+    } 
+};
+// Hàm xếp loại chức vụ 
+Staff.prototype.getRank = function(){
+    if (this.workinghours >=192){
+        return "Nhân Viên Xuất Sắc";
+    }else if (this.workinghours >=176){
+        return "Nhân Viên Giỏi";
+    }else if (this.workinghours >=160){
+        return " Nhân Viên Khá";
+    }else{
+        return " Nhân Viên Trung Bình";
 }
-// 2. Thêm nhân viên mới 
+};
+
+// Tạo array staffs để lưu trữ danh sách staff
+let staffs = []
 function addStaff(){
+    //B1: DOM lấy thông tin từ các input
+let account = dom("#tknv").value;
+let name = dom("#name").value;
+let email = dom("#email").value;
+let password = dom("#password").value;
+let workingdate = dom("#datepicker").value;
+let salary = +dom("#luongCB").value;
+let position = dom ("#chucvu").value;
+let workinghours = +dom ("#gioLam").value;
+
+//B2:  Tạo object chứa các thông tin trên
+let staff = new Staff(account, name, email, password, workingdate, salary, position, workinghours);
+console.log(staff);
+//B3: thêm object staff vào array staffs
+staffs.push[staff];
+//B4: Hiển thị array ra giao diện 
+display(staffs)
+// Dùng array này để hiển thị thông tin staff ra table 
+function display(staffs){
+    let html ="";
+    for (let i=0; i<staffs.length;i++){
+        let staff = staffs[i];
+        html += `
+        <tr>
+        <td>${staff.account}</td>
+        <td>${staff.name}</td>
+        <td>${staff.email}</td>
+        <td>${staff.workingdate}</td>
+        <td>${staff.salary}</td>
+        <td>${staff.position}</td>
+        <td>${staff.calcScore()}</td>
+        <td>${staff.getRank()}</td>
+        </tr>
+        `
+        dom("#btnCapNhat").innerHTML =html;
+    }
+}
 
 }
+
+
+
