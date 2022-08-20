@@ -38,7 +38,26 @@ Staff.prototype.getRank = function(){
 };
 
 // Tạo array staffs để lưu trữ danh sách staff
-let staffs = []
+let staffs = [];
+// Hàm init sẽ được thực thi khi chương trình được khởi chạy 
+init();
+function init(){
+    staffs = JSON.parse(localStorage.getItem("staffs))||[];
+    staffs = staff.map((staff) =>{
+    return new Staff(
+        staff.account,
+        staff.name,
+        staff.email,
+        staff.password,
+        staff.workingdate,
+        staff.salary,
+        staff.position,
+        staff.workinghours
+    });
+        console.log("Staff sau khi map:", staffs);
+        display(staffs);
+    }
+                                             
 function addStaff(){
     //B1: DOM lấy thông tin từ các input
 let account = dom("#tknv").value;
