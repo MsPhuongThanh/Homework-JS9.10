@@ -130,7 +130,7 @@
                   <h3 class="text-left text-primary font-weight-bold">
                     Danh sách nhân viên
                   </h3>
-                  <button id="staffList" onclick="printStaffList()"></button>
+                  <button id="staffList"></button>
                 </div>
                 <div class="col-md-6 text-right">
                   <button
@@ -138,7 +138,7 @@
                     id="btnThem"
                     data-toggle="modal"
                     data-target="#myModal"
-                    onclick="addStaff()"
+                    onclick="resetForm()"
                   >
                     Thêm nhân viên
                   </button>
@@ -228,6 +228,7 @@
                     type="text"
                     name="tk"
                     id="tknv"
+                    oninput="validateId()"
                     class="form-control input-sm"
                     placeholder="Tài khoản"
                   />
@@ -247,6 +248,7 @@
                     type="name"
                     name="name"
                     id="name"
+                    oninput="validateName()"
                     class="form-control input-sm"
                     placeholder="Họ và tên"
                   />
@@ -265,6 +267,7 @@
                     type="email"
                     name="email"
                     id="email"
+                    oninput="validateEmail()"
                     class="form-control input-sm"
                     placeholder="Email"
                   />
@@ -284,6 +287,7 @@
                     type="password"
                     name="password"
                     id="password"
+                    oninput="validatePassword()"
                     class="form-control input-sm"
                     placeholder="Mật khẩu"
                   />
@@ -302,6 +306,7 @@
                     type="text"
                     name="ngaylam"
                     id="datepicker"
+                    oninput="validateWorkingdate()"
                     class="form-control"
                     placeholder="Ngày làm"
                   />
@@ -321,6 +326,7 @@
                     type="text"
                     name="luongCB"
                     id="luongCB"
+                    oninput="validateSalary()"
                     class="form-control input-sm"
                     placeholder="Lương cơ bản"
                   />
@@ -334,10 +340,14 @@
                       ><i class="fa fa-briefcase"></i
                     ></span>
                   </div>
-                  <select class="form-control" id="chucvu">
+                  <select
+                    class="form-control"
+                    id="chucvu"
+                    oninput="validatePosition()"
+                  >
                     <option value="">Chọn chức vụ</option>
                     <option value="Sếp">Sếp</option>
-                    <option value="Trưởng phòng">Trưởng phòng</option>
+                    <option value="Trường phòng">Trưởng phòng</option>
                     <option value="Nhân viên">Nhân viên</option>
                   </select>
                 </div>
@@ -355,6 +365,7 @@
                     type="text"
                     name="gioLam"
                     id="gioLam"
+                    oninput="validateWorkinghours()"
                     class="form-control input-sm"
                     placeholder="Giờ làm"
                   />
@@ -366,10 +377,20 @@
 
           <!-- Modal footer -->
           <div class="modal-footer" id="modal-footer">
-            <button id="btnThemNV" type="button" class="btn btn-success">
+            <button
+              id="btnThemNV"
+              type="button"
+              class="btn btn-success"
+              onclick="addStaff()"
+            >
               Thêm người dùng
             </button>
-            <button id="btnCapNhat" type="button" class="btn btn-success">
+            <button
+              id="btnCapNhat"
+              type="button"
+              class="btn btn-success"
+              onclick="updateStaff()"
+            >
               Cập nhật
             </button>
             <button
