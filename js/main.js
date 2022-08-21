@@ -93,7 +93,7 @@ function display(staffs){
         <td>${staff.getRank()}</td>
         </tr>
         `
-        dom("#btnCapNhat").innerHTML =html;
+        dom("#tableDanhSach").innerHTML =html;
     }
 }
 
