@@ -18,9 +18,9 @@ Staff.prototype.calcScore = function(){
     let currentFormat = new Intl.NumberFormat("vn-VN");
     if (this.position == "Sếp"){
         return currentFormat.format(this.salary *3);
-    }else if (this.position == "Trưởng Phòng"){
+    }else if (this.position == "Trưởng phòng"){
         return currentFormat.format(this.salary *2);
-    }else if (this.postition == "Nhân Viên"){
+    }else if (this.postition == "Nhân viên"){
         return currentFormat.format (this.salary *1);
     } 
 };
